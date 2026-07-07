@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Real Life Factorization Simulation</title>
+<style>
+body{font-family:Arial;text-align:center;background:#eef6ff;padding:20px}
+.container{background:white;padding:25px;border-radius:15px;max-width:850px;margin:auto}
+.grid{display:inline-grid;grid-template-columns:repeat(5,50px);gap:3px;margin:20px}
+.cell{height:50px;border:1px solid #333;background:#ddd;display:flex;align-items:center;justify-content:center}
+.highlight{background:#ffd966}
+button{padding:12px;font-size:16px;border-radius:8px}
+.step{font-size:20px;margin:15px;padding:15px;background:#f2f2f2;border-radius:10px}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Factorization - Real Life Area Model Simulation</h1>
+
+<p><b>Example:</b> A rectangular garden has area represented by:</p>
+<h2>x² + 5x + 6</h2>
+
+<p>We divide the garden into smaller rectangles.</p>
+
+<button onclick="showStep()">Build Garden</button>
+
+<div id="garden"></div>
+<div id="result" class="step"></div>
+
+</div>
+
+<script>
+let stage=0;
+
+function showStep(){
+stage++;
+let g=document.getElementById("garden");
+let r=document.getElementById("result");
+
+if(stage==1){
+g.innerHTML="";
+let grid=document.createElement("div");
+grid.className="grid";
+
+for(let i=0;i<25;i++){
+let c=document.createElement("div");
+c.className="cell";
+c.innerHTML="Area";
+grid.appendChild(c);
+}
+g.appendChild(grid);
+r.innerHTML="Step 1: The total garden area is split into smaller rectangular parts.";
+}
+
+else if(stage==2){
+g.innerHTML="";
+let grid=document.createElement("div");
+grid.className="grid";
+for(let i=0;i<25;i++){
+let c=document.createElement("div");
+c.className="cell";
+if(i<4 || (i>=5 && i<10)) c.className="cell highlight";
+c.innerHTML=i<5?"x":"";
+grid.appendChild(c);
+}
+g.appendChild(grid);
+r.innerHTML="Step 2: Arrange parts to identify dimensions. The extra areas are 2 and 3.";
+}
+
+else if(stage==3){
+g.innerHTML="";
+r.innerHTML="Step 3: Length = (x + 2), Width = (x + 3)<br><br>Therefore Garden Area = (x + 2)(x + 3)";
+}
+
+else{
+stage=0;
+g.innerHTML="";
+r.innerHTML="Click Build Garden to start again.";
+}
+}
+</script>
+
+</body>
+</html>
